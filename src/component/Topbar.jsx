@@ -1,25 +1,22 @@
 import React from 'react';
-import { browserHistory } from 'react-router'
 import {Select} from 'antd';
 const Option = Select.Option;
 
-export default class Logout extends React.Component {
+export default class Topbar extends React.Component {
     constructor(props) {
         super(props);
     }
-
     handleChange = (v) => {
         if(v === '退出') {
             window.sessionStorage.clear();
-            browserHistory.push('/login');
         }
     }
     render() {
         let logoutWrap = {
             textAlign: 'right',
+            padding: 16,
             paddingRight: 25,
-            borderBottom: '1px solid #ddd',
-            paddingBottom: 20
+            borderBottom: '1px solid #e9e9e9'
         }
         return (
             <div style={logoutWrap}>

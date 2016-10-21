@@ -15,7 +15,7 @@ module.exports = {
     },
     entry: {
         index: path.resolve(__dirname, 'src/js/index.jsx'),
-        list: path.resolve(__dirname, 'src/js/list.jsx')
+        chart: path.resolve(__dirname, 'src/js/chart.jsx')
     },
     output: {
         path: path.join(__dirname, 'dist'),
@@ -40,7 +40,7 @@ module.exports = {
         new webpack.ProvidePlugin({ $:"jquery" }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendors', // 将公共模块提取，生成名为`vendors`的chunk
-            chunks: ['index','list'], //提取哪些模块共有的部分
+            chunks: ['index','chart'], //提取哪些模块共有的部分
             minChunks: 2 // 提取至少3个模块共有的部分
         }),
         new ExtractTextPlugin("css/[name].css"),
@@ -54,11 +54,11 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
             favicon: './src/img/favicon.ico', //favicon路径，通过webpack引入同时可以生成hash值
-            filename: 'view/list.html', //生成的html存放路径，相对于path
-            template: './src/view/list.html', //html模板路径
+            filename: 'view/chart.html', //生成的html存放路径，相对于path
+            template: './src/view/chart.html', //html模板路径
             inject: 'body', //js插入的位置，true/'head'/'body'/false
             hash: true, //为静态资源生成hash值
-            chunks: ['vendors', 'list']            
+            chunks: ['vendors', 'chart']            
         }),
         new OpenBrowserPlugin({ url: 'http://localhost:8080/dist/view/index.html' })
     

@@ -8,10 +8,10 @@ import '../less/component/rightContainer.less';
 
 ReactDOM.render(
     <div>        
-        <Sidebar cKey="index"/>
+        <Sidebar cKey="chart"/>
         <div id="rightWrap">
             <Topbar />
-            <p>index</p>            
+            <p>chart</p>            
         </div>
     </div>
     , document.querySelector('#init')

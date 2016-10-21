@@ -1,60 +1,56 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import '../less/component/Sidebar.less';
 
 // 引入Antd组件
 import { Menu, Icon } from 'antd';
 const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
 
 export default class Sidebar extends React.Component {
     constructor(props) {
-        super(props);
+        super(props);  
         this.state = {
-            current: '1'
-        }
-    }    
-    handleClick = (e) => {
-        console.log('click ', e);
-    this.setState({
-      current: e.key,
-    });
+            current:this.props.cKey
+        }      
     }
-    
+
+    changeFileName = (newName) => {
+        let pro = window.location.protocol;
+        let host = window.location.host;
+        let pathname = window.location.pathname;
+        let n = pathname.lastIndexOf('/');
+        let path = pathname.substring(0,n+1);
+        window.location.href = pro + '//' + host + path + newName +'.html';
+
+    }    
+    handleClick = (item) => {   
+        console.log(item);
+        this.changeFileName(item.key);
+    }
+
     render() {
         return (
             <div id="leftMenu"> 
-                {/*<img src={require('../images/logo.png')} width="50" id="logo"/>*/}  {/*logo图标*/}                
-                <Menu onClick={this.handleClick}
-                        style={{ width: 240 }}
-                        defaultOpenKeys={['sub1']}
-                        selectedKeys={[this.state.current]}
-                        mode="inline"
-                      >
-                        <SubMenu key="sub1" title={<span><Icon type="mail" /><span>Navigation One</span></span>}>
-                          <MenuItemGroup title="Item 1">
-                            <Menu.Item key="1"><a href="./list.html">Option</a></Menu.Item>
-                            <Menu.Item key="2">f</Menu.Item>
-                          </MenuItemGroup>
-                          <MenuItemGroup title="Item 2">
-                            <Menu.Item key="3">Option 3</Menu.Item>
-                            <Menu.Item key="4">Option 4</Menu.Item>
-                          </MenuItemGroup>
-                        </SubMenu>
-                        <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>Navigation Two</span></span>}>
-                          <Menu.Item key="5">Option 5</Menu.Item>
-                          <Menu.Item key="6">Option 6</Menu.Item>
-                          <SubMenu key="sub3" title="Submenu">
-                            <Menu.Item key="7">Option 7</Menu.Item>
-                            <Menu.Item key="8">Option 8</Menu.Item>
-                          </SubMenu>
-                        </SubMenu>
-                        <SubMenu key="sub4" title={<span><Icon type="setting" /><span>Navigation Three</span></span>}>
-                          <Menu.Item key="9">Option 9</Menu.Item>
-                          <Menu.Item key="10">Option 10</Menu.Item>
-                          <Menu.Item key="11">Option 11</Menu.Item>
-                          <Menu.Item key="12">Option 12</Menu.Item>
-                        </SubMenu>
-                      </Menu>
+                <h1 id="logo">Auto BYY</h1>
+                <Menu theme="light"
+                    style={{ width: 146 }}                 
+                    mode="vertical"
+                    onClick={this.handleClick}
+                    selectedKeys={[this.state.current]}
+                >
+                    <Menu.Item key="index">                    
+                        <span><Icon type="home" /><span>首页</span></span>
+                    </Menu.Item>  
+                    <SubMenu key="report" title={<span><Icon type="line-chart" /><span>数据报告</span></span>}>
+                      <Menu.Item key="chart">数据概览</Menu.Item>
+                      <Menu.Item key="ad">广告报告</Menu.Item>
+                    </SubMenu>
+                    <Menu.Item key="finance">                    
+                        <span><Icon type="pay-circle-o" /><span>财务管理</span></span>
+                    </Menu.Item>                    
+                    <Menu.Item key="log">                    
+                        <span><Icon type="edit" /><span>开发后记</span></span>
+                    </Menu.Item>
+                </Menu>
                 <div id="copyright">Copyright © 白延云</div>                    
             </div>                
         )
