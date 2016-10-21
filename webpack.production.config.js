@@ -5,8 +5,8 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: {
-        index: path.resolve(__dirname, 'src/js/index.js'),
-        list: path.resolve(__dirname, 'src/js/list.js')
+        index: path.resolve(__dirname, 'src/js/index.jsx'),
+        list: path.resolve(__dirname, 'src/js/list.jsx')
     },
     output: {
         path: path.join(__dirname, 'dist'),

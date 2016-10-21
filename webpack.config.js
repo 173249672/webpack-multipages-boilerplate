@@ -14,11 +14,12 @@ module.exports = {
         contentBase: './'
     },
     entry: {
-        index: path.resolve(__dirname, 'src/js/index.js'),
-        list: path.resolve(__dirname, 'src/js/list.js')
+        index: path.resolve(__dirname, 'src/js/index.jsx'),
+        list: path.resolve(__dirname, 'src/js/list.jsx')
     },
     output: {
         path: path.join(__dirname, 'dist'),
+        publicPath:'/dist/',
         filename: 'js/[name].js',
         chunkFilename: 'js/[id].chunk.js'
     },
@@ -45,7 +46,7 @@ module.exports = {
         new ExtractTextPlugin("css/[name].css"),
         new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
             favicon: './src/img/favicon.ico', //favicon路径，通过webpack引入同时可以生成hash值
-            filename: './view/index.html', //生成的html存放路径，相对于path
+            filename: 'view/index.html', //生成的html存放路径，相对于path
             template: './src/view/index.html', //html模板路径
             inject: 'body', //js插入的位置，true/'head'/'body'/false
             hash: true, //为静态资源生成hash值
@@ -53,7 +54,7 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
             favicon: './src/img/favicon.ico', //favicon路径，通过webpack引入同时可以生成hash值
-            filename: './view/list.html', //生成的html存放路径，相对于path
+            filename: 'view/list.html', //生成的html存放路径，相对于path
             template: './src/view/list.html', //html模板路径
             inject: 'body', //js插入的位置，true/'head'/'body'/false
             hash: true, //为静态资源生成hash值
