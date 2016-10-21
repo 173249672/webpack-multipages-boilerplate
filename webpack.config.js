@@ -19,7 +19,6 @@ module.exports = {
     },
     output: {
         path: path.join(__dirname, 'dist'),
-        publicPath:'/dist/',  //居然影响了html中的图片路径
         filename: 'js/[name].js',
         chunkFilename: 'js/[id].chunk.js'
     },
@@ -29,7 +28,7 @@ module.exports = {
             { test: /\.css$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader') },
             { test: /\.less$/, loader: ExtractTextPlugin.extract("css-loader!less-loader") },
             { test: /\.js[x]?$/, exclude: /node_modules/, loader: 'babel-loader' },
-            { test: /\.(png|jpg|jpeg|gif)$/, loader: "url-loader?limit=1024&name=./img/[hash].[ext]" },
+            { test: /\.(png|jpg|jpeg|gif)$/, loader: "url-loader?limit=1024&name=img/[name].[ext]" },
             { test: /\.(woff|woff2|eot|ttf|svg)(\?.*$|$)/, loader: "file-loader" }
         ]
     },
@@ -60,7 +59,7 @@ module.exports = {
             hash: true, //为静态资源生成hash值
             chunks: ['vendors', 'list']            
         }),
-        new OpenBrowserPlugin({ url: 'http://localhost:8080/dist/view/list.html' })
+        new OpenBrowserPlugin({ url: 'http://localhost:8080/dist/view/index.html' })
     
     ]
 };

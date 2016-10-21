@@ -10,7 +10,7 @@ module.exports = {
     },
     output: {
         path: path.join(__dirname, 'dist'),
-        publicPath:'/dist/',  //模板、样式、脚本、图片等资源对应的server上的路径
+        publicPath:'../',  //模板、样式、脚本、图片等资源对应的server上的路径
         filename: 'js/[name].js',
         chunkFilename: 'js/[id].chunk.js'
     },
@@ -20,7 +20,7 @@ module.exports = {
             { test: /\.css$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader') },
             { test: /\.less$/, loader: ExtractTextPlugin.extract("css-loader!less-loader") },
             { test: /\.js[x]?$/, exclude: /node_modules/, loader: 'babel-loader' },
-            { test: /\.(png|jpg|jpeg|gif)$/, loader:"url-loader?limit=1024&name=./img/[hash].[ext]"  },
+            { test: /\.(png|jpg|jpeg|gif)$/, loader:"url-loader?limit=1024&name=img/[name].[ext]"  },
             { test: /\.(woff|woff2|eot|ttf|svg)(\?.*$|$)/, loader: "file-loader" }
         ]
     },
@@ -37,19 +37,19 @@ module.exports = {
         new ExtractTextPlugin("css/[name].css"),
         new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
             favicon: './src/img/favicon.ico', //favicon路径，通过webpack引入同时可以生成hash值
-            filename: './view/index.html', //生成的html存放路径，相对于path
+            filename: 'view/index.html', //生成的html存放路径，相对于path
             template: './src/view/index.html', //html模板路径
             inject: 'body', //js插入的位置，true/'head'/'body'/false
             hash: true, //为静态资源生成hash值
-            chunks: ['vendors', 'index']            
+            chunks: ['vendors', 'index']
         }),
         new HtmlWebpackPlugin({ 
             favicon: './src/img/favicon.ico', 
-            filename: './view/list.html', 
+            filename: 'view/list.html', 
             template: './src/view/list.html', 
             inject: 'body', 
             hash: true, 
-            chunks: ['vendors', 'list']            
+            chunks: ['vendors', 'list']
         })
         // new webpack.optimize.UglifyJsPlugin({
         //     compress: {
