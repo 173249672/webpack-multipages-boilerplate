@@ -1,5 +1,7 @@
 import React from 'react';
 import {Select} from 'antd';
+// 引入模拟数据
+import '../data/aderName.js';
 
 import '../less/component/Topbar.less';
 const Option = Select.Option;
@@ -7,12 +9,24 @@ const Option = Select.Option;
 export default class Topbar extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            selV: []
+        }
     }
     changeAder = (v) => {
         alert(v);
     }
     logout = (v) => {
         
+    }
+    componentDidMount() {
+        $.ajax({
+            url:'getAderNameList'
+        })
+        .done((res) => {
+            let resObj = JSON.parse(res);
+            this.setState({selV:resObj.list});            
+        })
     }
     render() {        
         return (
@@ -27,12 +41,11 @@ export default class Topbar extends React.Component {
                         optionFilterProp="children"
                         notFoundContent="未找到"
                     >
-                        <Option value="广告主一">广告主一</Option>
-                        <Option value="广告主二">广告主二</Option>
-                        <Option value="广告主三">广告主三</Option>
-                        <Option value="广告主四">广告主四</Option>
-                        <Option value="广告主五">广告主五</Option>
-                        <Option value="广告主六">广告主六</Option>
+                        {
+                            this.state.selV.map((v,i) => {
+                                return <Option key={i} value={v}>{v}</Option>                                                    
+                            })
+                        }                        
                     </Select>
                 </div>
                 <div id="logoutSel">

@@ -30,6 +30,7 @@
     "html-webpack-plugin": "^2.22.0",
     "less": "",
     "less-loader": "",
+    "mockjs": "^1.0.1-beta3",
     "open-browser-webpack-plugin": "",
     "style-loader": "",
     "url-loader": "",

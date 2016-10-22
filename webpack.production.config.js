@@ -6,7 +6,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     entry: {
         index: path.resolve(__dirname, 'src/js/index.jsx'),
-        list: path.resolve(__dirname, 'src/js/list.jsx')
+        chart: path.resolve(__dirname, 'src/js/chart.jsx')
     },
     output: {
         path: path.join(__dirname, 'dist'),
@@ -31,7 +31,7 @@ module.exports = {
         new webpack.ProvidePlugin({ $:"jquery" }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendors', // 将公共模块提取，生成名为`vendors`的chunk
-            chunks: ['index','list'], //提取哪些模块共有的部分
+            chunks: ['index','chart'], //提取哪些模块共有的部分
             minChunks: 2 // 提取至少3个模块共有的部分
         }),
         new ExtractTextPlugin("css/[name].css"),
@@ -45,16 +45,16 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({ 
             favicon: './src/img/favicon.ico', 
-            filename: 'view/list.html', 
-            template: './src/view/list.html', 
+            filename: 'view/chart.html', 
+            template: './src/view/chart.html', 
             inject: 'body', 
             hash: true, 
-            chunks: ['vendors', 'list']
+            chunks: ['vendors', 'chart']
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            }
         })
-        // new webpack.optimize.UglifyJsPlugin({
-        //     compress: {
-        //         warnings: false
-        //     }
-        // })
     ]
 };
