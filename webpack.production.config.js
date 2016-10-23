@@ -5,6 +5,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: {
+        login: path.resolve(__dirname, 'src/js/login.jsx'),
         index: path.resolve(__dirname, 'src/js/index.jsx'),
         chart: path.resolve(__dirname, 'src/js/chart.jsx')
     },
@@ -29,19 +30,27 @@ module.exports = {
     },
     plugins: [
         new webpack.ProvidePlugin({ $:"jquery" }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendors', // 将公共模块提取，生成名为`vendors`的chunk
-            chunks: ['index','chart'], //提取哪些模块共有的部分
-            minChunks: 2 // 提取至少3个模块共有的部分
-        }),
         new ExtractTextPlugin("css/[name].css"),
-        new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
-            favicon: './src/img/favicon.ico', //favicon路径，通过webpack引入同时可以生成hash值
-            filename: 'view/index.html', //生成的html存放路径，相对于path
-            template: './src/view/index.html', //html模板路径
-            inject: 'body', //js插入的位置，true/'head'/'body'/false
-            hash: true, //为静态资源生成hash值
-            chunks: ['vendors', 'index']
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendors', 
+            chunks: ['login','index','chart'], 
+            minChunks: 3 
+        }),
+        new HtmlWebpackPlugin({ 
+            favicon: './src/img/favicon.ico', 
+            filename: 'view/login.html', 
+            template: './src/view/login.html', 
+            inject: 'body', 
+            hash: true, 
+            chunks: ['vendors', 'login']            
+        }),
+        new HtmlWebpackPlugin({ 
+            favicon: './src/img/favicon.ico', 
+            filename: 'view/index.html', 
+            template: './src/view/index.html', 
+            inject: 'body', 
+            hash: true, 
+            chunks: ['vendors', 'index']            
         }),
         new HtmlWebpackPlugin({ 
             favicon: './src/img/favicon.ico', 
@@ -49,7 +58,7 @@ module.exports = {
             template: './src/view/chart.html', 
             inject: 'body', 
             hash: true, 
-            chunks: ['vendors', 'chart']
+            chunks: ['vendors', 'chart']            
         }),
         new webpack.optimize.UglifyJsPlugin({
             compress: {

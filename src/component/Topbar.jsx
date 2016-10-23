@@ -1,4 +1,5 @@
 import React from 'react';
+import { changeFileName } from '../js/common/common.js';
 import {Select} from 'antd';
 // 引入模拟数据
 import '../data/aderName.js';
@@ -17,7 +18,7 @@ export default class Topbar extends React.Component {
         alert(v);
     }
     logout = (v) => {
-        
+        changeFileName('login');
     }
     componentDidMount() {
         $.ajax({

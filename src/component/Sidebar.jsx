@@ -20,10 +20,8 @@ export default class Sidebar extends React.Component {
         let n = pathname.lastIndexOf('/');
         let path = pathname.substring(0,n+1);
         window.location.href = pro + '//' + host + path + newName +'.html';
-
     }    
     handleClick = (item) => {   
-        console.log(item);
         this.changeFileName(item.key);
     }
 
